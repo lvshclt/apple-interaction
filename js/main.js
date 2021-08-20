@@ -68,20 +68,24 @@
     }
   }
   //
-  function calcValues(values, currentYoffset) {}
+  function calcValues(values, currentYoffset) {
+    let scrollRatio = currentYoffset / sceneInfo[currentScene].scrollHeight;
+    let rv = scrollRatio * (values[1] - values[0]) + values[0];
+    return rv;
+  }
 
   function playAnimation() {
     const objs = sceneInfo[currentScene].objs;
     const values = sceneInfo[currentScene].values;
+    const currentYoffset = yOffset - prevScrollHeight;
 
     switch (currentScene) {
       case 0:
-        let messageA_opacity_0 = values.messageA_opcity[0];
-        let messageA_opacity_1 = values.messageA_opcity[1];
-        const currentYoffset = yOffset - prevScrollHeight;
-        console.log(
-          calcValues(calcValues(values.messageA_opcity, currentYoffset))
+        let messageA_opacity_in = calcValues(
+          values.messageA_opcity,
+          currentYoffset
         );
+        objs.messageA.style.opacity = messageA_opacity_in;
 
         break;
 
@@ -111,7 +115,6 @@
       currentScene--;
       document.body.setAttribute('id', `show-scene-${currentScene}`);
     }
-    console.log(currentScene);
   }
   window.addEventListener('scroll', () => {
     yOffset = window.pageYOffset;
