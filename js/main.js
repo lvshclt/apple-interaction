@@ -1,7 +1,9 @@
 (() => {
   let yOffset = 0;
-  let prevScrollHeight;
+  let prevScrollHeight = 0;
   let currentScene = 0;
+  let enterNewScene = false;
+
   const sceneInfo = [
     //0
     {
@@ -86,7 +88,7 @@
           currentYoffset
         );
         objs.messageA.style.opacity = messageA_opacity_in;
-
+        console.log(currentScene, messageA_opacity_in);
         break;
 
       case 1:
@@ -102,24 +104,29 @@
   //
   function scrollLoop() {
     prevScrollHeight = 0;
+    enterNewScene = false;
+
     for (let i = 0; i < currentScene; i++) {
       prevScrollHeight += sceneInfo[i].scrollHeight;
     }
 
     if (yOffset > prevScrollHeight + sceneInfo[currentScene].scrollHeight) {
+      enterNewScene = true;
       currentScene++;
       document.body.setAttribute('id', `show-scene-${currentScene}`);
     }
     if (yOffset < prevScrollHeight) {
       if (yOffset < 0) return;
+      enterNewScene = true;
       currentScene--;
       document.body.setAttribute('id', `show-scene-${currentScene}`);
     }
+    if (enterNewScene) return;
+    playAnimation();
   }
   window.addEventListener('scroll', () => {
     yOffset = window.pageYOffset;
     scrollLoop();
-    playAnimation();
   });
   window.addEventListener('load', setLayout);
   window.addEventListener('resize', setLayout);
