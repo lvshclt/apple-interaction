@@ -1,6 +1,6 @@
 (() => {
   let yOffset = 0;
-  let prevHeight;
+  let prevScrollHeight;
   let currentScene = 0;
   const sceneInfo = [
     //0
@@ -68,13 +68,21 @@
     }
   }
   //
+  function calcValues(values, currentYoffset) {}
+
   function playAnimation() {
+    const objs = sceneInfo[currentScene].objs;
+    const values = sceneInfo[currentScene].values;
+
     switch (currentScene) {
       case 0:
-        // sceneInfo[0].objs.messageA.style.opacity =
-        //   (sceneInfo[0].values.messageA_opcity[0] +
-        //     sceneInfo[0].values.messageA_opcity[1]) /
-        //   2;
+        let messageA_opacity_0 = values.messageA_opcity[0];
+        let messageA_opacity_1 = values.messageA_opcity[1];
+        const currentYoffset = yOffset - prevScrollHeight;
+        console.log(
+          calcValues(calcValues(values.messageA_opcity, currentYoffset))
+        );
+
         break;
 
       case 1:
@@ -89,16 +97,16 @@
   }
   //
   function scrollLoop() {
-    prevHeight = 0;
+    prevScrollHeight = 0;
     for (let i = 0; i < currentScene; i++) {
-      prevHeight += sceneInfo[i].scrollHeight;
+      prevScrollHeight += sceneInfo[i].scrollHeight;
     }
 
-    if (yOffset > prevHeight + sceneInfo[currentScene].scrollHeight) {
+    if (yOffset > prevScrollHeight + sceneInfo[currentScene].scrollHeight) {
       currentScene++;
       document.body.setAttribute('id', `show-scene-${currentScene}`);
     }
-    if (yOffset < prevHeight) {
+    if (yOffset < prevScrollHeight) {
       if (yOffset < 0) return;
       currentScene--;
       document.body.setAttribute('id', `show-scene-${currentScene}`);
