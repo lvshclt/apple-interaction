@@ -1,4 +1,6 @@
 (() => {
+  let yOffset = 0;
+
   const sceneInfo = [
     //0
     {
@@ -47,4 +49,28 @@
   }
   setLayout();
   window.addEventListener('resize', setLayout);
+  //
+  let prevHeight;
+
+  let currentScene = 0;
+
+  function scrollLoop() {
+    prevHeight = 0;
+    for (let i = 0; i < currentScene; i++) {
+      prevHeight += sceneInfo[i].scrollHeight;
+    }
+
+    if (yOffset > prevHeight + sceneInfo[currentScene].scrollHeight) {
+      currentScene++;
+    }
+    if (yOffset < prevHeight) {
+      if (yOffset < 0) return;
+      currentScene--;
+    }
+    console.log(currentScene);
+  }
+  window.addEventListener('scroll', () => {
+    yOffset = window.pageYOffset;
+    scrollLoop();
+  });
 })();
