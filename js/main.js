@@ -18,7 +18,8 @@
         messageD: document.querySelector('#scroll-section-0 .main-message.d'),
       },
       values: {
-        messageA_opcity: [0, 1],
+        messageA_opcity: [0, 1, { start: 0.1, end: 0.2 }],
+        messageB_opcity: [0, 1, { start: 0.3, end: 0.4 }],
       },
     },
     //1
@@ -71,8 +72,29 @@
   }
   //
   function calcValues(values, currentYoffset) {
-    let scrollRatio = currentYoffset / sceneInfo[currentScene].scrollHeight;
-    let rv = scrollRatio * (values[1] - values[0]) + values[0];
+    let rv;
+    const scrollHeight = sceneInfo[currentScene].scrollHeight;
+    const scrollRatio = currentYoffset / scrollHeight;
+    if (values.length === 3) {
+      const partScrollStart = values[2].start * scrollHeight;
+      const partScrollEnd = values[2].end * scrollHeight;
+      const partScrollHeight = partScrollEnd - partScrollStart;
+      const partScrollRatio =
+        (currentYoffset - partScrollStart) / partScrollHeight;
+      switch (true) {
+        case currentYoffset < partScrollStart:
+          rv = values[0];
+          break;
+        case currentYoffset > partScrollEnd:
+          rv = values[1];
+          break;
+        default:
+          rv = partScrollRatio * (values[1] - values[0]) + values[0];
+          break;
+      }
+    } else {
+      rv = scrollRatio * (values[1] - values[0]) + values[0];
+    }
     return rv;
   }
 
@@ -88,7 +110,7 @@
           currentYoffset
         );
         objs.messageA.style.opacity = messageA_opacity_in;
-        console.log(currentScene, messageA_opacity_in);
+        // console.log(currentScene, messageA_opacity_in);
         break;
 
       case 1:
