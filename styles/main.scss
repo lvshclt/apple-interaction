@@ -121,6 +121,14 @@ a {
   height: 100px;
   background-color: rgb(29, 29, 31);
 }
+#scroll-section-2 .b {
+  top: 10%;
+  left: 40%;
+}
+#scroll-section-2 .c {
+  top: 15%;
+  left: 45%;
+}
 .mid-message {
   max-width: 1000px;
   margin: 0 auto;
@@ -156,7 +164,7 @@ a {
 }
 
 #show-scene-0 #scroll-section-0 .sticky-elem,
-#show-scene-1 #scroll-section-1 .sticky-elem,
+// #show-scene-1 #scroll-section-1 .sticky-elem,
 #show-scene-2 #scroll-section-2 .sticky-elem,
 #show-scene-3 #scroll-section-3 .sticky-elem {
   display: block;
@@ -183,6 +191,14 @@ a {
   }
   .desc-message {
     width: 20%;
+  }
+  #scroll-section-2 .b {
+    top: 20%;
+    left: 53%;
+  }
+  #scroll-section-2 .c {
+    // top은 모바일일때 동일
+    left: 55%;
   }
   .mid-message {
     font-size: 4vw;
