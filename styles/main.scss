@@ -76,11 +76,13 @@ a {
 }
 
 .main-message {
-  justify-content: center;
   display: flex;
-  height: 3em;
-  font-size: 2.5rem;
+  justify-content: center;
   align-items: center;
+  height: 3em;
+  top: 35vh;
+  margin: 5px 0;
+  font-size: 2.5rem;
   opacity: 0;
 }
 
@@ -148,7 +150,7 @@ a {
 .sticky-elem {
   display: none;
   position: fixed;
-  top: 0;
+  // top: 0;
   left: 0;
   width: 100%;
 }
