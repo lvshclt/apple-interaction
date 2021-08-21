@@ -158,10 +158,18 @@ a {
   text-decoration: none; }
 
 .global-nav {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
   height: 44px;
   padding: 0 1rem; }
 
 .local-nav {
+  position: absolute;
+  top: 45px;
+  left: 0;
+  width: 100%;
   height: 52px;
   border-bottom: 1px solid #ddd;
   padding: 0 1rem; }
@@ -189,18 +197,22 @@ a {
   margin-left: 2em; }
 
 .scroll-section {
-  padding-top: 50vh; }
+  padding-top: 50vh;
+  border: 5px solid cornflowerblue; }
 
 #scroll-section-0 h1 {
   font-size: 4rem;
   text-align: center; }
 
 .main-message {
-  justify-content: center;
   display: flex;
+  justify-content: center;
+  align-items: center;
   height: 3em;
+  top: 35vh;
+  margin: 5px 0;
   font-size: 2.5rem;
-  align-items: center; }
+  opacity: 0; }
 
 .main-message p {
   font-weight: bold;
@@ -228,7 +240,7 @@ a {
   font-size: 3rem;
   color: #1d1d1f; }
 
-.desc-message {
+.sticky-elem.desc-message {
   width: 50%;
   font-weight: bold; }
 
@@ -236,6 +248,14 @@ a {
   width: 1px;
   height: 100px;
   background-color: #1d1d1f; }
+
+#scroll-section-2 .b {
+  top: 10%;
+  left: 40%; }
+
+#scroll-section-2 .c {
+  top: 15%;
+  left: 45%; }
 
 .mid-message {
   max-width: 1000px;
@@ -265,12 +285,10 @@ a {
 .sticky-elem {
   display: none;
   position: fixed;
-  top: 0;
   left: 0;
   width: 100%; }
 
 #show-scene-0 #scroll-section-0 .sticky-elem,
-#show-scene-1 #scroll-section-1 .sticky-elem,
 #show-scene-2 #scroll-section-2 .sticky-elem,
 #show-scene-3 #scroll-section-3 .sticky-elem {
   display: block; }
@@ -290,6 +308,11 @@ a {
     font-size: 1.5vw; }
   .desc-message {
     width: 20%; }
+  #scroll-section-2 .b {
+    top: 20%;
+    left: 53%; }
+  #scroll-section-2 .c {
+    left: 55%; }
   .mid-message {
     font-size: 4vw; }
   .canvas-caption {
